@@ -27,13 +27,18 @@ def displayTest():
         # Refresh
         epd.display(epd.getbuffer(image))
 
-def displayUpdate(text, img):
+def displayUpdate(text, img, x, y):
     draw = ImageDraw.Draw(img)
     font = ImageFont.truetype("/usr/share/fonts/truetype/freefont/FreeMono.ttf", 18)
-    draw.text((10, 30), text, font = font, fill = 0)
+    draw.text((x, y), text, font = font, fill = 0)
     print("Refreshing screen...")
 
     epd.display(epd.getbuffer(img))
+
+def displayClear():
+    # Clear screen (255 - fill with white, width x height of the screen)
+    image = Image.new('1', (epd2in7.EPD_WIDTH, epd2in7.EPD_HEIGHT), 255)
+    ImageDraw.Draw(image)
 
 
 if __name__ == '__main__':
@@ -43,6 +48,8 @@ if __name__ == '__main__':
     epd = epd2in7.EPD()
     epd.init()
     image = Image.new('1', (epd2in7.EPD_WIDTH, epd2in7.EPD_HEIGHT), 255)
+    draw = ImageDraw.Draw(image)
+
 
     key1 = 5
     key2 = 6
@@ -65,19 +72,23 @@ if __name__ == '__main__':
         
         if getKey1 == False:
             print("Button One")
-            displayUpdate("Button One", image)
+            displayClear()
+            displayUpdate("Button One", image, 10, 30)
             time.sleep(0.2)
         if getKey2 == False:
             print("Button Two")
-            displayUpdate("Button Two", image)
+            displayClear()
+            displayUpdate("Button Two", image, 10, 45)
             time.sleep(0.2)
         if getKey3 == False:
             print("Button Three")
-            displayUpdate("Button Three", image)
+            displayClear()
+            displayUpdate("Button Three", image, 10, 60)
             time.sleep(0.2)
         if getKey4 == False:
             print("Button Four")
-            displayUpdate("Button Four", image)
+            displayClear()
+            displayUpdate("Button Four", image, 10, 75)
             time.sleep(0.2)
 
 
