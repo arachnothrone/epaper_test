@@ -48,7 +48,7 @@ if __name__ == '__main__':
     epd = epd2in7.EPD()
     epd.init()
     image = Image.new('1', (epd2in7.EPD_WIDTH, epd2in7.EPD_HEIGHT), 255)
-    draw = ImageDraw.Draw(image)
+    #draw = ImageDraw.Draw(image)
 
 
     key1 = 5
@@ -62,11 +62,14 @@ if __name__ == '__main__':
     GPIO.setup(key4, GPIO.IN, pull_up_down=GPIO.PUD_UP)
 
     while True:
+        #print "---> 1"
         getKey1 = GPIO.input(key1)
         getKey2 = GPIO.input(key2)
         getKey3 = GPIO.input(key3)
         getKey4 = GPIO.input(key4)
-         
+
+        #print "---> 2"
+        #print "{} {} {} {}".format(getKey1, getKey2, getKey3, getKey4)
         #displayUpdate("Btn prssd", image)
         #time.sleep(0.3)
         
@@ -87,7 +90,8 @@ if __name__ == '__main__':
             time.sleep(0.2)
         if getKey4 == False:
             print("Button Four")
-            displayClear()
+            #displayClear()
+            displayUpdate("      x   ", image, 10, 30)
             displayUpdate("Button Four", image, 10, 75)
             time.sleep(0.2)
 
